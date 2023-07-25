@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    var promedio = prompt("Capture la calificación");
+    promedio = parseInt(promedio);
+    
+    if (promedio >= 90 && promedio <= 100) {
+        console.log("Promedio excelente");
+    } else if (promedio >= 80 && promedio <= 89) {
+        console.log("Promedio Sobresaliente");
+    } else if (promedio >= 70 && promedio <= 79) {
+        console.log("Promedio Bueno");
+    } else if (promedio >= 60 && promedio <= 69) {
+        console.log("Promedio Aprobatorio");
+    } else if (promedio < 60) {
+        console.log("Lastimosamente reprobaste");
+    } else {
+        console.log("Calificación inválida. Debe ser un número entre 0 y 100");
+    }
+    
+</body>
+</html>
