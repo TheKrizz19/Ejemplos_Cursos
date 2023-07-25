@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+   var numeroSecreto = Math.floor(Math.random() * 100) + 1;
+var intentos = 0;
+var num = prompt("Ingresa un número entre 1 y 100 para ver si puedes adivinarlo");
+num = parseInt(num);
+
+while (num !== numeroSecreto) {
+    if (num < numeroSecreto) {
+        console.log("El número es mayor. Intentalo nuevamente");
+    } else {
+        console.log("El número es menor. Intentalo nuevamente");
+    }
+    intentos++;
+    num = prompt("Ingresa otro número entre 1 y 100 para continuar intentando");
+    num = parseInt(num);
+}
+
+// Cuando el ciclo while termina, significa que el usuario adivinó correctamente
+console.log("¡Felicitaciones! Adivinaste el número secreto " + numeroSecreto + " en " + intentos + " intentos.");
+
+
+// Cuando el ciclo while termina, significa que el usuario adivinó correctamente
+console.log("¡Felicitaciones! Adivinaste el número secreto " + numeroSecreto + " en " + intentos + " intentos.");
+
+
+// Cuando el ciclo while termina, significa que el usuario adivinó correctamente
+console.log("¡Felicitaciones! Adivinaste el número secreto " + numeroSecreto + " en " + intentos + " intentos.");
+/*Este ejemplo hace uso del cilo while que es uno de los temas abarcados dentro del curdo Fundamentos de javascript*/
+    </script>
+</body>
+</html>
