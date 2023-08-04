@@ -1,0 +1,88 @@
+SELECT p.Prod_ID, p.Prod_Descripcion, p.Prod_Precio, p.Prod_ProvId 
+FROM productos p
+WHERE Prod_Precio>0 AND (Prod_ProvId>10 AND Prod_ProvId<50)
+
+
+SELECT * 
+FROM ventas v
+WHERE v.Ventas_Fecha >'2018-01-02' AND v.Ventas_Fecha<'2018-01-04'
+
+SELECT * 
+FROM ventas v
+WHERE YEAR (v.Ventas_Fecha) =2018
+
+SELECT * 
+FROM ventas v
+WHERE month v.Ventas_Fecha= 01
+
+SELECT * 
+FROM ventas v
+WHERE month v.Ventas_Fecha BETWEEN '2018-01-01' AND '2018-01-03'
+
+SELECT * 
+FROM ventas_detalle vd
+WHERE vd.VD_ProvId=1128
+SELECT v.Ventas_NroFactura, v.Ventas_CliId, c.Cli_RazonSocial, v.Ventas_Fecha, vd.VD_ProdId, p.Prod_Descripcion, pr.Prov_Id, pr.Prov_Nombre    
+FROM ventas v, clientes c, ventas_detalle vd, productos p, proveedores pr
+WHERE v.Ventas_CliId = c.Cli_Id AND v.Ventas_CliId>1 AND vd.VD_VentasId = v.Ventas_Id AND vd.VD_ProdId = p.Prod_Id AND p.Prod_ProvId = pr.Prov_Id
+ORDER BY Ventas_Fecha DESC, Prod_Descripcion
+
+SELECT COUNT(*) AS registros
+FROM ventas v
+WHERE v.Ventas_Fecha = '2018-01-02';
+
+SELECT COUNT(*) AS registros
+FROM ventas v
+
+SELECT SUM(v.Ventas_Total) AS Total
+FROM ventas v 
+WHERE YEAR(v.Ventas_Fecha) = 2018 AND MONTH (v.Ventas_Fecha) = 01
+
+SELECT MIN(v.Ventas_Total) AS VtaMinima
+FROM ventas v 
+WHERE YEAR(v.Ventas_Fecha) = 2018 AND MONTH (v.Ventas_Fecha) = 01
+
+SELECT MAX(v.Ventas_Total) AS VtaMinima
+FROM ventas v 
+WHERE YEAR(v.Ventas_Fecha) = 2018 AND MONTH (v.Ventas_Fecha) = 01
+
+SELECT AVG(v.Ventas_Total) AS VtaMinima
+FROM ventas v 
+WHERE YEAR(v.Ventas_Fecha) = 2018 AND MONTH (v.Ventas_Fecha) = 01
+
+SELECT vd.VD_ProdId,p.Prod_Descripcion, COUNT(*) AS ventas FROM ventas_detalle vd, productos p
+WHERE p.Prod_Id = vd.VD_ProdId
+GROUP BY vd.VD_ProdId, p.Prod_Descripcion
+
+SELECT YEAR(v.Ventas_Fecha) AS año, MONTH(v.Ventas_Fecha) AS mes, SUM(v.Ventas_Total) AS Total
+FROM ventas v
+GROUP BY YEAR(v.Ventas_Fecha), MONTH(v.Ventas_Fecha);
+
+SELECT YEAR(v.Ventas_Fecha) AS año, MONTH(v.Ventas_Fecha) AS mes, SUM(v.Ventas_Total) AS Total
+FROM ventas v
+GROUP BY YEAR(v.Ventas_Fecha), MONTH(v.Ventas_Fecha)
+HAVING total > 1000000
+
+SELECT vd.VD_ProdId, p.Prod_Descripcion, COUNT(*) AS ventas
+FROM ventas_detalle vd
+JOIN productos p ON p.Prod_Id = vd.VD_ProdId
+GROUP BY vd.VD_ProdId, p.Prod_Descripcion
+HAVING COUNT(*) > 100
+ORDER BY ventas DESC;
+
+SELECT * FROM productos p WHERE p.Prod_Id NOT IN (4,8,10,16)
+
+SELECT * FROM productos p WHERE p.Prod_Id IN (4,8,10,16)
+
+SELECT * FROM productos p WHERE p.Prod_Id NOT IN (SELECT DISTINCTROW (vd.VD_ProdId) AS producto FROM ventas_detalle vd)
+
+FROM productos p WHERE p.Prod_Id IN (SELECT DISTINCTROW (vd.VD_ProdId) AS producto FROM ventas_detalle vd)
+
+SELECT * FROM clientes c
+WHERE c.Cli_Id IN (SELECT DISTINCTROW(v.Ventas_CliId) FROM ventas v)
+
+SELECT * FROM clientes c
+WHERE c.Cli_Id NOT IN (SELECT DISTINCTROW(v.Ventas_CliId) FROM ventas v)
+
+SELECT * FROM clientes c
+WHERE c.Cli_Id IN (SELECT DISTINCTROW(v.Ventas_CliId) FROM ventas v WHERE v.ventas_Total>1000)
